@@ -13,7 +13,7 @@ build_points = 1 # points for building. tentative
 submission_points = 1
 
 def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
-    points = submission_points
+    points = 0
     script_path = os.path.dirname(os.path.realpath(__file__))
 
     # create temporary directory so that previous students' results will not affect subsequent tests
@@ -96,6 +96,7 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
             if return_code > 1:
                 print(f"diff exited with an unknown return code. This shouldn't happen. Here is the stderr: {stderr_}")
     print(f"{int((points - build_points) / test_case_points)} / {len(testCases)} test casing passing. ")
+    points += submission_points
     print(f"Points awarded - {points} ")
     return points, output 
 
