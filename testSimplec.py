@@ -108,7 +108,7 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
             if return_code > 1:
                 print(f"diff exited with an unknown return code. This shouldn't happen. Here is the stderr: {stderr_}")
     print(f"{test_cases} / {len(testCases)} test casing passing. ")
-    points += test_case_points*10/test_cases
+    points += test_case_points*10/len(testCases)
     print(f"Points awarded - {points:.1f} ")
     return points, output 
 
