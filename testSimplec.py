@@ -106,8 +106,8 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
                 # unmatching_lines = len(stdout_)
                 # matching_percentage = 1 - unmatching_lines/ total_lines
                 stdout_lines = len(stdout_.split('\n'))
-                with open(output_file, 'r') as stdout_file:
-                    stdout_lines = len(stdout_file.readlines())
+                # with open(output_file, 'r') as stdout_file:
+                #     stdout_lines = len(stdout_file.readlines())
                 matching_percentage = 1 - stdout_lines/ total_lines
                 test_case_points +=matching_percentage
                 print(f"Failure. See {diff_file} for diff and {output_file} for output.")
