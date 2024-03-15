@@ -8,13 +8,16 @@ import subprocess
 from lib import cd, Submission, run_cmd
 
 source_path = os.path.dirname(os.path.abspath(__file__)) # /a/b/c/d/e
-test_case_points = 0
+
 build_points = 1 # points for building. tentative
 submission_points = 1
-test_cases = 0
+# test_cases = 0
+# test_case_points = 0
 
 def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
     points = submission_points
+    test_case_points=0
+    test_cases=0
     script_path = os.path.dirname(os.path.realpath(__file__))
 
     # create temporary directory so that previous students' results will not affect subsequent tests
