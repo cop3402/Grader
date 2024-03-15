@@ -8,12 +8,13 @@ import subprocess
 from lib import cd, Submission, run_cmd
 
 source_path = os.path.dirname(os.path.abspath(__file__)) # /a/b/c/d/e
-test_case_points = 1
+test_case_points = 0
 build_points = 1 # points for building. tentative
 submission_points = 1
+test_cases = 0
 
 def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
-    points = 0
+    points = submission_points
     script_path = os.path.dirname(os.path.realpath(__file__))
 
     # create temporary directory so that previous students' results will not affect subsequent tests
@@ -85,24 +86,27 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
             return_code, stdout_, stderr_ = run_cmd(cmd,False)
             if return_code == 0 and len(stdout_) == 0:
                 print("Success!")
-                points += test_case_points
+                test_case_points += 1
+                test_cases +=1
             if return_code == 1 and len(stdout_) > 0:
                 with open(ground_truth, 'r') as f:
                     total_lines = len(f.readlines())
                 with open(output_file, 'r') as f:
                     output_lines = len(f.readlines())
                 matching_percentage = (total_lines - output_lines) / total_lines
+                test_case_points +=matching_percentage
+                test_cases += 1
                 print(f"Failure. See {diff_file} for diff and {output_file} for output.")
                 diff_out = open(diff_file, "w")
                 diff_out.write(stdout_)
                 diff_out.close()
-                print(f"Percentage of matching lines: {matching_percentage}%")
+                print(f"Percentage of matching lines: {matching_percentage:.1f}")
 
                 return_code, stdout_, stderr_ = run_cmd(cmd,False)
             if return_code > 1:
                 print(f"diff exited with an unknown return code. This shouldn't happen. Here is the stderr: {stderr_}")
-    print(f"{int((points - build_points) / test_case_points)} / {len(testCases)} test casing passing. ")
-    points += submission_points
+    print(f"{test_cases} / {len(testCases)} test casing passing. ")
+    points += test_case_points*10/test_cases
     print(f"Points awarded - {points} ")
     return points, output 
 
