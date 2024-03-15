@@ -105,7 +105,7 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
                 #             matching_lines += 1
                 # unmatching_lines = len(stdout_)
                 # matching_percentage = 1 - unmatching_lines/ total_lines
-                stdout_lines = len(stdout_.split('\n'))
+                stdout_lines = len(stdout_.splitlines())
                 print(f"{stdout_lines, total_lines}")
                 matching_percentage = 1 - stdout_lines/ total_lines
                 test_case_points +=matching_percentage
