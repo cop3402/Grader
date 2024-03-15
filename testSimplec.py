@@ -92,11 +92,18 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
                 test_case_points += 1
                 test_cases +=1
             if return_code == 1 and len(stdout_) > 0:
-                with open(ground_truth, 'r') as f:
-                    total_lines = len(f.readlines())
-                with open(output_file, 'r') as f:
-                    output_lines = len(f.readlines())
-                matching_percentage = (total_lines - output_lines) / total_lines
+                # with open(ground_truth, 'r') as f:
+                #     total_lines = len(f.readlines())
+                # with open(output_file, 'r') as f:
+                #     output_lines = len(f.readlines())
+                # matching_percentage = (total_lines - output_lines) / total_lines
+                matching_lines = 0
+                with open(ground_truth, 'r') as gt, open(output_file, 'r') as out:
+                    total_lines = len(gt.readlines())
+                    for line_gt, line_out in zip(gt, out):
+                        if line_gt == line_out:
+                            matching_lines += 1
+                matching_percentage = matching_lines/ total_lines
                 test_case_points +=matching_percentage
                 print(f"Failure. See {diff_file} for diff and {output_file} for output.")
                 diff_out = open(diff_file, "w")
