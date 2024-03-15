@@ -116,6 +116,8 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
 
                 with open(diff_file, 'r') as f:
                     diff_lines = len(f.readlines())
+                print(f"{stdout_}")
+                print(f"{stdout_lines, total_lines}")
                 matching_percentage = (total_lines - diff_lines)/ total_lines
                 print(f"Percentage of matching lines: {matching_percentage}")
 
