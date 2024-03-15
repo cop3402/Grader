@@ -98,7 +98,6 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
                     output_lines = len(f.readlines())
                 matching_percentage = (total_lines - output_lines) / total_lines
                 test_case_points +=matching_percentage
-                test_cases += 1
                 print(f"Failure. See {diff_file} for diff and {output_file} for output.")
                 diff_out = open(diff_file, "w")
                 diff_out.write(stdout_)
@@ -110,7 +109,7 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
                 print(f"diff exited with an unknown return code. This shouldn't happen. Here is the stderr: {stderr_}")
     print(f"{test_cases} / {len(testCases)} test casing passing. ")
     points += test_case_points*10/test_cases
-    print(f"Points awarded - {points} ")
+    print(f"Points awarded - {points:.1f} ")
     return points, output 
 
 def error(app, f):
