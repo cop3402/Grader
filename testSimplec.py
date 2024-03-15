@@ -102,7 +102,7 @@ def buildAndTest(submissionpath, sourceTestPath, no_remove, gcc=False):
                 diff_out = open(diff_file, "w")
                 diff_out.write(stdout_)
                 diff_out.close()
-                print(f"Percentage of matching lines: {matching_percentage:.1f}")
+                print(f"Percentage of matching lines: {matching_percentage:.2f}")
 
                 return_code, stdout_, stderr_ = run_cmd(cmd,False)
             if return_code > 1:
